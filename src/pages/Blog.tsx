@@ -1,49 +1,40 @@
-import { FaDatabase, FaChartLine, FaServer } from "react-icons/fa";
-import { ReactElement } from "react";
-
-interface BlogItem {
-  title: string;
-  description: string;
-  icon: ReactElement;
-}
+import { FaChartLine, FaDatabase, FaServer } from "react-icons/fa";
 
 const Blog: React.FC = () => {
-  const blogs: BlogItem[] = [
+  const blogs = [
     {
       title: "Introduction to Data Analytics",
       description:
-        "Learn how data analytics helps businesses make informed decisions.",
-      icon: <FaChartLine size={30} />,
+        "Data analytics helps organizations make data-driven decisions by identifying patterns and insights.",
+      icon: <FaChartLine size={28} />,
     },
     {
       title: "Big Data vs Data Science",
       description:
-        "Understand the differences and real-world applications.",
-      icon: <FaDatabase size={30} />,
+        "Big Data focuses on data handling while Data Science focuses on extracting meaning from data.",
+      icon: <FaDatabase size={28} />,
     },
     {
-      title: "Careers in Data Engineering",
+      title: "Career Paths in Data Engineering",
       description:
-        "Explore tools, roles, and career opportunities in data engineering.",
-      icon: <FaServer size={30} />,
+        "Data engineers build pipelines and infrastructure that power modern data platforms.",
+      icon: <FaServer size={28} />,
     },
   ];
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        Data Insights Blog
-      </h1>
+    <div className="max-w-7xl mx-auto px-6 py-12">
+      <h1 className="text-3xl font-bold text-center mb-10">Blog</h1>
 
       <div className="grid md:grid-cols-3 gap-6">
         {blogs.map((blog, index) => (
           <div
             key={index}
-            className="bg-white border rounded-xl p-6 shadow hover:shadow-xl transition"
+            className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition"
           >
-            <div className="text-blue-600 mb-4">{blog.icon}</div>
+            <div className="text-[#028eb8] mb-4">{blog.icon}</div>
             <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-            <p className="text-gray-600">{blog.description}</p>
+            <p className="text-gray-600 text-sm">{blog.description}</p>
           </div>
         ))}
       </div>
