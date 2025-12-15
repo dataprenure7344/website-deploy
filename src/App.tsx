@@ -7,81 +7,73 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { Logo } from './components/Logo';
-import { Landing } from './pages/Landing';
-import { About } from './pages/About';
-import { Career } from './pages/Career';
+import Logo from './components/Logo';
+
+// ✅ USE DEFAULT IMPORTS (MOST COMMON)
+import Landing from './pages/Landing';
+import About from './pages/About';
+import Career from './pages/Career';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Support from './pages/Support';
 
 import { Menu, X } from 'lucide-react';
 
-/* ---------------- Navigation ---------------- */
+/* ---------------- NAVIGATION ---------------- */
 
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const linkClass = (path: string) =>
+    `cursor-pointer font-medium transition-colors ${
+      location.pathname === path
+        ? 'text-[#028eb8]'
+        : 'text-gray-700 hover:text-[#028eb8]'
+    }`;
 
-  const navItem = (label: string, path: string) => (
-    <span
-      onClick={() => navigate(path)}
-      className={`cursor-pointer font-medium transition-colors ${
-        isActive(path)
-          ? 'text-[#028eb8]'
-          : 'text-gray-700 hover:text-[#028eb8]'
-      }`}
-    >
-      {label}
-    </span>
-  );
+  const go = (path: string) => {
+    navigate(path);
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
-      <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
+      <nav className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
         <div
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => navigate('/')}
         >
           <Logo className="w-10 h-10" />
-          <span className="text-2xl font-bold">
-            Data<span className="font-bold">Prenure</span>
-          </span>
+          <span className="text-2xl font-bold">DataPrenure</span>
         </div>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {navItem('Home', '/')}
-          {navItem('About', '/about')}
-          {navItem('Careers', '/careers')}
-          {navItem('Blog', '/blog')}
-          {navItem('Contact', '/contact')}
-          {navItem('Support', '/support')}
+        <div className="hidden md:flex gap-8 items-center">
+          <span onClick={() => go('/')} className={linkClass('/')}>Home</span>
+          <span onClick={() => go('/about')} className={linkClass('/about')}>About</span>
+          <span onClick={() => go('/careers')} className={linkClass('/careers')}>Careers</span>
+          <span onClick={() => go('/blog')} className={linkClass('/blog')}>Blog</span>
+          <span onClick={() => go('/contact')} className={linkClass('/contact')}>Contact</span>
+          <span onClick={() => go('/support')} className={linkClass('/support')}>Support</span>
 
           <button
-            onClick={() => navigate('/')}
-            className="bg-gradient-to-r from-[#03a9dc] to-[#027fa4] text-white px-6 py-2 rounded-lg font-bold hover:shadow-lg transition"
+            onClick={() => go('/')}
+            className="bg-gradient-to-r from-[#03a9dc] to-[#027fa4] text-white px-5 py-2 rounded-lg font-bold"
           >
             Enroll Now
           </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        {/* Mobile */}
+        <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-3">
+        <div className="md:hidden px-4 pb-4 space-y-2">
           {[
             ['Home', '/'],
             ['About', '/about'],
@@ -92,11 +84,8 @@ function Navigation() {
           ].map(([label, path]) => (
             <div
               key={path}
-              onClick={() => {
-                navigate(path);
-                setIsMenuOpen(false);
-              }}
-              className="cursor-pointer py-2 text-gray-700 hover:text-[#028eb8]"
+              onClick={() => go(path)}
+              className="py-2 cursor-pointer text-gray-700 hover:text-[#028eb8]"
             >
               {label}
             </div>
@@ -107,7 +96,7 @@ function Navigation() {
   );
 }
 
-/* ---------------- Footer ---------------- */
+/* ---------------- FOOTER ---------------- */
 
 function Footer() {
   const navigate = useNavigate();
@@ -122,13 +111,10 @@ function Footer() {
   );
 
   return (
-    <footer className="bg-[#333] text-white py-12">
+    <footer className="bg-[#333] text-white py-10">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8">
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <Logo className="w-10 h-10" />
-            <span className="text-xl font-bold">DataPrenure</span>
-          </div>
+          <Logo className="w-10 h-10 mb-3" />
           <p className="text-gray-400 text-sm">
             Empowering learners with industry-ready data skills.
           </p>
@@ -137,7 +123,7 @@ function Footer() {
         <div>
           <h4 className="font-bold mb-3">Company</h4>
           <div className="space-y-2 text-gray-400 text-sm">
-            {link('About Us', '/about')}
+            {link('About', '/about')}
             {link('Careers', '/careers')}
             {link('Blog', '/blog')}
             {link('Contact', '/contact')}
@@ -155,24 +141,23 @@ function Footer() {
         </div>
 
         <div>
-          <h4 className="font-bold mb-3">Get Started</h4>
           <button
             onClick={() => navigate('/')}
-            className="mt-2 bg-[#028eb8] px-5 py-2 rounded-lg font-bold"
+            className="bg-[#028eb8] px-5 py-2 rounded-lg font-bold"
           >
             Enroll Now
           </button>
         </div>
       </div>
 
-      <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+      <div className="border-t border-gray-700 mt-6 pt-4 text-center text-gray-400 text-sm">
         © 2024 DataPrenure. All rights reserved.
       </div>
     </footer>
   );
 }
 
-/* ---------------- Routes ---------------- */
+/* ---------------- ROUTES ---------------- */
 
 function AppContent() {
   return (
@@ -193,8 +178,6 @@ function AppContent() {
   );
 }
 
-/* ---------------- App Root ---------------- */
-
 export default function App() {
   return (
     <Router>
@@ -202,3 +185,8 @@ export default function App() {
     </Router>
   );
 }
+
+export default function Blog() { ... }
+export default function Contact() { ... }
+export default function Support() { ... }
+export const Blog = () => {}
