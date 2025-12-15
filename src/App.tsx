@@ -189,4 +189,4 @@ export default function App() {
 export default function Blog() { ... }
 export default function Contact() { ... }
 export default function Support() { ... }
-export const Blog = () => {}
+
