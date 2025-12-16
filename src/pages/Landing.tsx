@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { CourseInquiryForm } from '../components/CourseInquiryForm';
 import { BookOpen, Target, Users, Award, BarChart, ChevronRight, Zap, Briefcase } from 'lucide-react';
+import { IndustryTools } from "../components/IndustryTools";
 
 export function Landing() {
   const navigate = useNavigate();
