@@ -4,6 +4,9 @@ import { Logo } from './components/Logo';
 import { Landing } from './pages/Landing';
 import { About } from './pages/About';
 import { Career } from './pages/Career';
+import Blog from './pages/Blog';
+import Contact from './pages/Contact';
+import Support from './pages/Support';
 import { Menu, X, ChevronRight } from 'lucide-react';
 
 function Navigation() {
@@ -45,12 +48,28 @@ function Navigation() {
               About
             </a>
             <a
-              onClick={() => navigate('/careers')}
+              onClick={() => navigate('/blog')}
               className={`cursor-pointer font-medium transition-colors ${
-                isActive('/careers') ? 'text-[#028eb8]' : 'text-gray-700 hover:text-[#028eb8]'
+                isActive('/blog') ? 'text-[#028eb8]' : 'text-gray-700 hover:text-[#028eb8]'
               }`}
             >
-              Careers
+              Blog
+            </a>
+            <a
+              onClick={() => navigate('/contact')}
+              className={`cursor-pointer font-medium transition-colors ${
+                isActive('/contact') ? 'text-[#028eb8]' : 'text-gray-700 hover:text-[#028eb8]'
+              }`}
+            >
+              Contact
+            </a>
+            <a
+              onClick={() => navigate('/support')}
+              className={`cursor-pointer font-medium transition-colors ${
+                isActive('/support') ? 'text-[#028eb8]' : 'text-gray-700 hover:text-[#028eb8]'
+              }`}
+            >
+              Support
             </a>
             <button
               onClick={() => navigate('/')}
@@ -90,12 +109,30 @@ function Navigation() {
             </a>
             <a
               onClick={() => {
-                navigate('/careers');
+                navigate('/blog');
                 setIsMenuOpen(false);
               }}
               className="block cursor-pointer text-gray-700 hover:text-[#028eb8] transition-colors font-medium py-2"
             >
-              Careers
+              Blog
+            </a>
+            <a
+              onClick={() => {
+                navigate('/contact');
+                setIsMenuOpen(false);
+              }}
+              className="block cursor-pointer text-gray-700 hover:text-[#028eb8] transition-colors font-medium py-2"
+            >
+              Contact
+            </a>
+            <a
+              onClick={() => {
+                navigate('/support');
+                setIsMenuOpen(false);
+              }}
+              className="block cursor-pointer text-gray-700 hover:text-[#028eb8] transition-colors font-medium py-2"
+            >
+              Support
             </a>
             <button
               onClick={() => {
@@ -172,17 +209,26 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  onClick={() => navigate('/careers')}
+                  className="cursor-pointer hover:text-white transition-colors"
+                >
                   Careers
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  onClick={() => navigate('/blog')}
+                  className="cursor-pointer hover:text-white transition-colors"
+                >
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  onClick={() => navigate('/contact')}
+                  className="cursor-pointer hover:text-white transition-colors"
+                >
                   Contact
                 </a>
               </li>
@@ -193,7 +239,10 @@ function Footer() {
             <h4 className="font-bold text-lg mb-4">Support</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  onClick={() => navigate('/support')}
+                  className="cursor-pointer hover:text-white transition-colors"
+                >
                   Help Center
                 </a>
               </li>
@@ -208,7 +257,10 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  onClick={() => navigate('/support')}
+                  className="cursor-pointer hover:text-white transition-colors"
+                >
                   FAQs
                 </a>
               </li>
@@ -235,6 +287,9 @@ function AppContent() {
           <Route path="/" element={<Landing />} />
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Career />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/support" element={<Support />} />
         </Routes>
       </div>
       <Footer />
