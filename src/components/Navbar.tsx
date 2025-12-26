@@ -12,7 +12,7 @@ const Navbar = () => {
         onClick={() => navigate("/")}
       >
         <Logo className="w-8 h-8" />
-        <span className="text-xl font-bold relative -top-[4px]">
+        <span className="text-xl font-bold relative -top-[6px]">
           DataPrenure
         </span>
       </div>
